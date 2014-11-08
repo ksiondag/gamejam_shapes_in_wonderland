@@ -1,29 +1,27 @@
 Crafty.init(600, 600, document.getElementById('game'));
 
-var radius = 10;
-var ball = Crafty.e('Canvas,2D,Color,Velocity')
+var square = Crafty.e('Friend,DOM,2D,Color,Velocity,Collision,Bounce')
     .attr({
         x:0,
-        y:Crafty.math.randomInt(0,600),
-        w:10,
-        h:10
+        y:0,
+        w:100,
+        h:100
     })
     .Velocity( 
-        Crafty.math.randomInt(0,0),
-        0
+        10,
+        10
     )
     .color("green");
 
-var radius2 = 20;
-var ball2 = Crafty.e('Canvas,2D,Color,Velocity')
+var square2 = Crafty.e('Friend,DOM,2D,Color,Velocity,Collision,Bounce')
     .attr({
-        x:0,
-        y:Crafty.math.randomInt(0,600),
-        w:10,
-        h:10
+        x:50,
+        y:50,
+        w:100,
+        h:100
     })
     .Velocity( 
-        1,
-        0
+        -10,
+        -10
     )
     .color("green");
