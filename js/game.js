@@ -1,5 +1,4 @@
-//Crafty.init(500,350, document.getElementById('game'));
-Crafty.init(600, 600);
+Crafty.init(600, 600, document.getElementById('game'));
 
 var radius = 10;
 var ball = Crafty.e('Canvas,2D,Color,Velocity')
