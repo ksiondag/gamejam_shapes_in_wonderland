@@ -16,6 +16,7 @@ successful and shrink when unsuccessful.
 ###############################################################################
 # Brainstorming
 ###############################################################################
+
 Mechanics
     Shapes that change sizes and move
         Player - Triangle
