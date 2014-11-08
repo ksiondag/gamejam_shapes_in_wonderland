@@ -59,10 +59,8 @@ Crafty.c("Bounce", {
                     this.elasticBounceSolid( collision );
 
                 }
-                this.color("red");
             },
             function() {
-                this.color("green");
             }
         );
 
@@ -76,10 +74,8 @@ Crafty.c("Bounce", {
                     this.elasticBounce( collision );
 
                 }
-                this.color("red");
             },
             function() {
-                this.color("green");
             }
         );
     },
