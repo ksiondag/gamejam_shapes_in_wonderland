@@ -60,6 +60,6 @@ circle = Crafty.e("2D, Canvas, Circle, Color")
 
 triangle = Crafty.e("2D, Canvas, Polygon, Color")
     .attr({points:[[50,0],[0,100],[100,100]]})
-    .attr({x:50,y:0})
+    .attr({x:50,y:0,w:100,h:100})
     .color('#00F');
 
