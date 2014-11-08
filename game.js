@@ -25,25 +25,22 @@ Crafty.c("Circle", {
     }
 }); 
 
-Crafty.c("Polygon",{
-    points:[],
-
-    init:function(){
-        this.bind("EnterFrame",function(){
-        this.draw();
-        })
-    },
-
+Crafty.c("Triangle",{
     draw:function(){
         var contex = Crafty.canvas.context;
         contex.save();
         contex.fillStyle = this.color();
         contex.beginPath();
-        for(var i in this.points){
-            var p = this.points[i];
-           
-            contex.lineTo(this.x+p[0], this.y+p[1]);
-        }
+
+        var mid_x = this.x+this.w/2;
+        contex.lineTo(mid_x, this.y);
+
+        var bottom = this.y + this.h;
+        contex.lineTo(this.x, bottom);
+
+        var right = this.x + this.w;
+        contex.lineTo(right, bottom);
+
         contex.closePath();
         contex.stroke();
         contex.fill();
@@ -52,14 +49,15 @@ Crafty.c("Polygon",{
 
 square = Crafty.e('2D, Canvas, Color')
     .attr({x: 0, y: 0, w: 100, h:100})
-    .color('#F00');
+    .color('#000');
+
+triangle = Crafty.e("2D, Canvas, Triangle, Color")
+    .attr({points:[[50,0],[0,100],[100,100]]})
+    .attr({x:50,y:0,w:100,h:100})
+    .color('#000');
 
 circle = Crafty.e("2D, Canvas, Circle, Color")
     .Circle(40)
-    .color('#0F0');
-
-triangle = Crafty.e("2D, Canvas, Polygon, Color")
-    .attr({points:[[50,0],[0,100],[100,100]]})
-    .attr({x:50,y:0,w:100,h:100})
-    .color('#00F');
+    .attr({x:10,y:10})
+    .color('#FFF');
 
