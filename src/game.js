@@ -1,85 +1,63 @@
-Crafty.init(600, 600, document.getElementById('game'));
 
-var roof = Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
+
+//GAME
+Game ={
+    start: function(){
+        Crafty.init(800, 600,  document.getElementById('game'));
+        // Crafty.background('rgb(87, 109, 20)');
+        Crafty.scene('MainGame');
+    }
+}
+
+//Scenes
+// Crafty.scene('Menu',{
+    
+
+// });
+var x=[];
+Crafty.scene('MainGame',function(){
+
+    //Create the walls
+    Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
     .attr({
         x:0,
-        y:-100,
-        w:600,
-        h:100
+        y:0,
+        w:800,
+        h:5
     })
-    .color("#000");
-var floor = Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
+    .color("black");
+    Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
     .attr({
         x:0,
-        y:600,
-        w:600,
-        h:100
-    })
-    .color("#000");
-
-var left = Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
-    .attr({
-        x:-100,
         y:0,
-        w:100,
+        w:5,
         h:600
     })
-    .color("#000");
-var right = Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
+    .color("black");
+    Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
     .attr({
-        x:600,
+        x:0,
+        y:595,
+        w:800,
+        h:5
+    })
+    .color("black");
+    Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
+    .attr({
+        x:795,
         y:0,
-        w:100,
-        h:600
+        w:5,
+        h:800
     })
-    .color("#000");
+    .color("black");
 
-var square = Crafty.e('Canvas,2D,Color,Velocity,Collision,Bounce')
-    .attr({
-        x:100,
-        y:100,
-        w:100,
-        h:100
-    })
-    .Velocity( 
-        Crafty.math.randomInt(-10, 10),
-        Crafty.math.randomInt(-10, 10)
-    )
-    .color("green");
+    
+    //Create 5 eatMes
+    for(var i=0;i<5;i++){
+        x.push(createRandomeatMe());
+    }
+});
 
-var square2 = Crafty.e('Canvas,2D,Color,Velocity,Collision,Bounce')
-    .attr({
-        x:300,
-        y:300,
-        w:100,
-        h:100
-    })
-    .Velocity( 
-        Crafty.math.randomInt(-10, 10),
-        Crafty.math.randomInt(-10, 10)
-    )
-    .color("green");
-var square3 = Crafty.e('Canvas,2D,Color,Velocity,Collision,Bounce')
-    .attr({
-        x:400,
-        y:400,
-        w:100,
-        h:100
-    })
-    .Velocity( 
-        Crafty.math.randomInt(-10, 10),
-        Crafty.math.randomInt(-10, 10)
-    )
-    .color("green");
-var square4 = Crafty.e('Canvas,2D,Color,Velocity,Collision,Bounce')
-    .attr({
-        x:400,
-        y:400,
-        w:100,
-        h:100
-    })
-    .Velocity( 
-        Crafty.math.randomInt(-10, 10),
-        Crafty.math.randomInt(-10, 10)
-    )
-    .color("green");
+Crafty.scene('Loading', function(){
+   
+});
