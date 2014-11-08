@@ -27,9 +27,9 @@ Mechanics
         controller?
 
 Javascript Libraries
-    Referenced in Web Game Developer's Cookbook
-    Rendering
+    jquery.js
     Game Engines
+        Decided on crafty.js
 
 Try out some open-sourced games that approximate our goal
     Look at code for understanding
