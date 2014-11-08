@@ -34,14 +34,14 @@ var right = Crafty.e('Solid,Canvas,2D,Color,Collision')
     })
     .color("#000");
 
-for (var i = 0; i < 5; i++) {
-	var radius = Crafty.math.randomInt(50, 70);
-	var ball = Crafty.e('Bounce,2D,Canvas,Circle,Velocity,Collision,Color')
-		.Circle(
-			Crafty.math.randomInt(0, 600),
-			Crafty.math.randomInt(0, 600),
-            Crafty.math.randomInt(50, 70)
-        )
+for (var i = 0; i < 10; i++) {
+	Crafty.e('Canvas,2D,Color,Velocity,Collision,Bounce')
+		.attr({
+            x: Crafty.math.randomInt(0,530),
+            y: Crafty.math.randomInt(0,530),
+            w: Crafty.math.randomInt(50,70),
+            h: Crafty.math.randomInt(50,70)
+        })
         .Velocity(
             Crafty.math.randomInt(-10, 10),
             Crafty.math.randomInt(-10, 10)
