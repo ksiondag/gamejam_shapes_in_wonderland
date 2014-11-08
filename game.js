@@ -1,7 +1,7 @@
 Crafty.c("Circle", {
 	Circle: function (radius, color) {
 		this.radius = radius;
-		this.w = this.h = radius * 2;
+		//this.w = this.h = radius * 2;
 		this.color = color || "#000000";
 
 		return this;
@@ -54,57 +54,14 @@ Crafty.c("Polygon", {
 
 Crafty.init(600, 600);
 
-c1 = Crafty.e('enemy,2D, Canvas,Circle, Collision')
-	.attr({
-		x: 0,
-		y: 0,
-		w: 40,
-		h: 40,
-		vx: 2,
-		vy: 3
-	})
-	.Circle(40, "green")
-	.bind('EnterFrame', function () {
-		if (this.x > 600 - 100 || this.x < 0)
-			this.vx *= -1;
-		if (this.y > 600 - 100 || this.y < 0)
-			this.vy *= -1;
-
-		this.x += this.vx;
-		this.y += this.vy;
-	})
-	.onHit('enemy', function () {
-		this.vx *= -1;
-		this.vy *= -1
-	});
-c1 = Crafty.e('enemy,2D, Canvas,Circle, Collision')
-	.attr({
-		x: 120,
-		y: 0,
-		w: 40,
-		h: 40,
-		vx: 1,
-		vy: 1
-	})
-	.Circle(40, "black")
-	.bind('EnterFrame', function () {
-		if (this.x > 600 - 100 || this.x < 0)
-			this.vx *= -1;
-		if (this.y > 600 - 100 || this.y < 0)
-			this.vy *= -1;
-
-		this.x += this.vx;
-		this.y += this.vy;
-	})
-	.onHit('enemy', function () {
-		this.vx *= -1;
-		this.vy *= -1
-	});
 
 
 
 
 
+
+
+/*
 
 //---------------
 //---------------
@@ -167,8 +124,8 @@ triangle = Crafty.e('enemy,2D, Canvas, Polygon, Color,Collision')
 	.attr({
 		x: 100,
 		y: 100,
-		w: 50,
-		h: 50,
+		w: 100,
+		h: 100,
 		vx: 1,
 		vy: 1,
 		points: [[50, 0], [0, 100], [100, 100]]
@@ -190,8 +147,49 @@ triangle = Crafty.e('enemy,2D, Canvas, Polygon, Color,Collision')
 	})
 
 
-//--------------
+*/
 
 
 
 var enemyList = [];
+for (var i = 0; i < Crafty.math.randomInt(20, 50); i++) {
+	var radius = Crafty.math.randomInt(5, 20);
+	var ball = Crafty.e('enemy,2D, Canvas,Circle')
+		.attr({
+			x: Crafty.math.randomInt(0,600),
+			y: Crafty.math.randomInt(0, 600),
+			w: radius*2,
+			h: radius*2,
+			vx: 1,
+			vy: 1
+		})
+		.Circle(radius, "green")
+		.bind('EnterFrame', function () {
+			for (var i in enemyList)
+			{
+				if (this!==enemyList[i]){
+				if (Math.abs(this.x-enemyList[i].x)+Math.abs(this.y-enemyList[i].y)<this.radius+enemyList[i].radius)
+				{
+					this.vx*=-1;
+					this.vy*=-1;
+				}
+			}}
+			
+			
+			if (this.x > 600 - 100 || this.x < 0)
+				this.vx *= -1;
+			if (this.y > 600 - 100 || this.y < 0)
+				this.vy *= -1;
+
+			this.x += this.vx;
+			this.y += this.vy;
+			
+			
+		})
+		
+	
+	enemyList.push(ball)
+}
+
+
+
