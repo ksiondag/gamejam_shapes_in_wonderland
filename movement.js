@@ -3,7 +3,8 @@ Crafty.c("Velocity", {
     vy:0,
     init: function() {
         this.bind('EnterFrame', function() {
-            this.shift( this.vx, this.vy );
+            this.x += this.vx;
+            this.y += this.vy;
         });
     },
 
@@ -13,4 +14,5 @@ Crafty.c("Velocity", {
 
         return this;
     }
+
 });
