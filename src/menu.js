@@ -10,7 +10,7 @@ Crafty.scene('Menu', function() {
         })
         .text("Start Game")
         .bind("MouseDown", function(e) {
-            Crafty.scene('MainGame');
+            Crafty.scene('LevelWallInTheMiddle');
         })
 
 });

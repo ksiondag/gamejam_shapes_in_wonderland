@@ -70,7 +70,7 @@ Crafty.c('EatMe', {
 
 	eatIt: function(collision){
 		var other = collision.obj;
-		this.level=this.level+other.level;
+		this.level=this.level+(other.level/2);
 		this.w=this.level;
 		this.h=this.level;
 		other.eaten();
@@ -117,10 +117,42 @@ Crafty.c('EatMe', {
 });
 
 
-function createRandomeatMe( minLevel, maxLevel ){
-	var randomXposition = Crafty.math.randomInt(0, 700);
-	var randomYposition = Crafty.math.randomInt(0, 500);
+function createRandomeatMe( minLevel, maxLevel, withWall ){
+    
+	var randomXposition;
+	var randomYposition;
+
 	var randomlevel = Crafty.math.randomInt(minLevel, maxLevel);
+
+
+    if( withWall ) {
+        var spawnSection = Crafty.math.randomInt(1,4);
+
+        switch (spawnSection) {
+            case 1:
+                randomXposition = Crafty.math.randomInt(6, 794-randomlevel);
+                randomYposition = Crafty.math.randomInt(6, 199-randomlevel);
+                break;
+            case 2:
+                randomXposition = Crafty.math.randomInt(6, 199-randomlevel);
+                randomYposition = Crafty.math.randomInt(6, 594-randomlevel);
+                break;
+            case 3:
+                randomXposition = Crafty.math.randomInt(6, 794-randomlevel);
+                randomYposition = Crafty.math.randomInt(401, 599-randomlevel);
+                break;
+            case 4:
+                randomXposition = Crafty.math.randomInt(601, 794-randomlevel);
+                randomYposition = Crafty.math.randomInt(6, 594-randomlevel);
+                break;
+            default:
+                alert( "Something horrible has happened!" );
+        }
+    }
+    else {
+        randomXposition = Crafty.math.randomInt(100, 700);
+        randomYposition = Crafty.math.randomInt(100, 500);
+    }
 	var eater = Crafty.e('EatMe').Velocity( 
         Crafty.math.randomInt(-1, 1),
         Crafty.math.randomInt(-1, 1)

@@ -45,7 +45,7 @@ function createBorderWalls() {
 
 }
 
-Crafty.scene('MainGame',function(){
+Crafty.scene('LevelOne',function(){
 
     createBorderWalls();
 
@@ -59,4 +59,29 @@ Crafty.scene('MainGame',function(){
     
     createRandomeatMe(7,7).addComponent('Alice');
 });
+
+Crafty.scene('LevelWallInTheMiddle',function(){
+
+    createBorderWalls();
+
+    Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
+    .attr({
+        x:200,
+        y:200,
+        w:400,
+        h:200
+    })
+    .color("black");
+
+    //Create 5 eatMes
+    for(var i=0;i<14;i++){
+        createRandomeatMe(3,6,true);
+    }
+    for(var i=0;i<14;i++){
+        createRandomeatMe(9,12,true);
+    }
+    
+    createRandomeatMe(7,7).addComponent('Alice');
+});
+
 
