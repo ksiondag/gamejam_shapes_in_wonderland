@@ -1,15 +1,35 @@
-Crafty.c('eatMe', {
+Crafty.c('EatMe', {
+	level:1,
 	init: function() {
 		this.requires('2D,Canvas,Color,Bounce,Clickable');
 		//Deafaul attributes
 		this.attr({
 			x:0,
         	y:0,
-        	w:50,
-        	h:50
+        	w:5,
+        	h:5
 		});
 		//Default color
 		this.color('green');
+
+		this.level=5;
+		this.onHit(
+			'EatMe',
+			function(collisions){
+				for( var i in collisions ) {
+                    var collision = collisions[i];
+                    if(this.canIEat(collision)){
+                    	this.eatIt(collision);
+                    }
+                    else{
+                    	this.undoOverlap( collision );
+                    	this.elasticBounce( collision );
+                    }
+                }
+			},
+            function() {
+            }
+		);
 	},
 
 	setPosition: function(x, y){
@@ -26,27 +46,78 @@ Crafty.c('eatMe', {
 		});
 	},
 
+	setLevel: function(l){
+		this.level=l;
+		this.attr({
+			w:l,
+        	h:l,
+		});
+	},
+
 	setColor: function(c){
 		var colors=['green','red']
 		this.color(colors[c]);
-	}
+	},
 
+	canIEat: function(collision){
+		var other = collision.obj;
+		if(this.level>other.level)
+			return true;
+		else 
+			return false;
+	},
+
+	eatIt: function(collision){
+		var other = collision.obj;
+		this.level=this.level+other.level;
+		this.w=this.level;
+		this.h=this.level;
+		other.eaten();
+	},
+
+	eaten: function(){
+		if(this.has('Alice'))
+			console.log("You LOST");
+		else{
+			this.destroy();
+		}
+	},
+
+	undoOverlap: function( collision ) {
+        this.x += collision.normal.x;
+        this.y += collision.normal.y;
+    },
+
+    elasticBounce: function( collision ) {
+        var other = collision.obj;
+
+        if( collision.normal.x !== 0 ) {
+            var temp;
+            temp = this.vx;
+            this.vx = other.vx;
+            other.vx = temp;
+        }
+
+        if( collision.normal.y !== 0 ) {
+            var temp;
+            temp = this.vy;
+            this.vy = other.vy;
+            other.vy = temp;
+        }
+    }
 
 });
+
 
 function createRandomeatMe(){
 	var randomXposition = Crafty.math.randomInt(0, 700);
 	var randomYposition = Crafty.math.randomInt(0, 500);
-	var randomW = Crafty.math.randomInt(40, 50);
-	var randomH = Crafty.math.randomInt(40, 50);
-	var randomColor =Crafty.math.randomInt(0, 3);
-
-	var eater = Crafty.e('eatMe').Velocity( 
-        Crafty.math.randomInt(-5, 5),
-        Crafty.math.randomInt(-5, 5)
+	var randomlevel = Crafty.math.randomInt(5, 10);
+	var eater = Crafty.e('EatMe').Velocity( 
+        Crafty.math.randomInt(-1, 1),
+        Crafty.math.randomInt(-1, 1)
     );
+    eater.setLevel(randomlevel);
 	eater.setPosition(randomXposition,randomYposition);
-	eater.setSize(randomW,randomH);
-	eater.setColor(randomColor);
 	return eater;
 }

@@ -63,20 +63,25 @@ Crafty.c('Bounce', {
             }
         );
 
-        this.onHit(
-            'Bounce',
-            function( collisions ) {
-                for( var i in collisions ) {
-                    var collision = collisions[i];
+        //
+        //hack for now 
+        //functionality move to eatMe
+        //add update function
+        //
+        // this.onHit(
+        //     'Bounce',
+        //     function( collisions ) {
+        //         for( var i in collisions ) {
+        //             var collision = collisions[i];
 
-                    this.undoOverlap( collision );
-                    this.elasticBounce( collision );
+        //             this.undoOverlap( collision );
+        //             this.elasticBounce( collision );
 
-                }
-            },
-            function() {
-            }
-        );
+        //         }
+        //     },
+        //     function() {
+        //     }
+        // );
     },
 
     undoOverlap: function( collision ) {

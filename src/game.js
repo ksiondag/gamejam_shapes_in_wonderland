@@ -45,7 +45,7 @@ Crafty.scene('MainGame',function(){
     .color("black");
 
     //Create 5 eatMes
-    for(var i=0;i<5;i++){
+    for(var i=0;i<30;i++){
         createRandomeatMe();
     }
 });
