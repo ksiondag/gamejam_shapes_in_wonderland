@@ -1,3 +1,4 @@
+var currentLevel=1;
 
 function createBorderWalls() {
     // Put a click listener on whole game div
@@ -47,21 +48,57 @@ function createBorderWalls() {
 
 Crafty.scene('LevelOne',function(){
 
+    Crafty.audio.play('AinW',-1);
+    eatMeCount = 0;
     createBorderWalls();
 
-    //Create 5 eatMes
-    for(var i=0;i<14;i++){
-        createRandomeatMe(3,6);
-    }
-    for(var i=0;i<14;i++){
-        createRandomeatMe(9,12);
-    }
     
-    createRandomeatMe(7,7).addComponent('Alice');
+
+    switch(currentLevel)
+    {
+        case 1:
+            for(var i=0;i<7;i++){
+                createRandomeatMe(10,15);
+            }
+            for(var i=0;i<3;i++){
+                createRandomeatMe(16,20);
+            }
+            createRandomeatMe(20,20).addComponent('Alice');
+            break;
+        case 2:
+            for(var i=0;i<15;i++){
+                createRandomeatMe(3,5);
+            }
+            for(var i=0;i<8;i++){
+                createRandomeatMe(7,10);
+            }
+            createRandomeatMe(8,8).addComponent('Alice');
+            break;
+        case 3:
+            for(var i=0;i<8;i++){
+                createRandomeatMe(3,5);
+            }
+            for(var i=0;i<10;i++){
+                createRandomeatMe(7,10);
+            }
+            createRandomeatMe(8,8).addComponent('Alice');
+            createRandomeatMe(20,20).setColor('red');
+            break;
+        default:
+            for(var i=0;i<4*currentLevel;i++){
+                createRandomeatMe(3,5);
+            }
+            for(var i=0;i<2*currentLevel;i++){
+                createRandomeatMe(3+currentLevel,5+currentLevel);
+            }
+            createRandomeatMe(7,7).addComponent('Alice');
+    }
 });
 
 Crafty.scene('LevelWallInTheMiddle',function(){
-
+    
+    Crafty.audio.play('AinW',-1);
+    eatMeCount = 0;
     createBorderWalls();
 
     Crafty.e('Solid,Canvas,2D,Color,Velocity,Collision')
@@ -73,15 +110,37 @@ Crafty.scene('LevelWallInTheMiddle',function(){
     })
     .color("black");
 
-    //Create 5 eatMes
-    for(var i=0;i<14;i++){
-        createRandomeatMe(3,6,true);
-    }
-    for(var i=0;i<14;i++){
-        createRandomeatMe(9,12,true);
-    }
-    
-    createRandomeatMe(7,7).addComponent('Alice');
+    switch(currentLevel)
+        {
+            case 4:
+                for(var i=0;i<7;i++){
+                    createRandomeatMe(10,15,true);
+                }
+                for(var i=0;i<3;i++){
+                    createRandomeatMe(16,20,true);
+                }
+                createRandomeatMe(20,20,true).addComponent('Alice');
+                break;
+            case 5:
+                for(var i=0;i<15;i++){
+                    createRandomeatMe(3,5,true);
+                }
+                for(var i=0;i<8;i++){
+                    createRandomeatMe(7,10,true);
+                }
+                createRandomeatMe(8,8,true).addComponent('Alice');
+                break;
+            case 6:
+                for(var i=0;i<8;i++){
+                    createRandomeatMe(3,5,true);
+                }
+                for(var i=0;i<10;i++){
+                    createRandomeatMe(7,10,true);
+                }
+                createRandomeatMe(8,8,true).addComponent('Alice');
+                createRandomeatMe(20,20,true).setColor('red');
+                break;
+        }
 });
 
 

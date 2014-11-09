@@ -13,13 +13,14 @@ Crafty.c( 'Control', {
         });
 
         this.bind("EnterFrame", function() {
-            if( this.mouseDown ) {
-                diffX = Crafty.mousePos.x - (alice.x+alice.w);
-                diffY = Crafty.mousePos.y - (alice.y+alice.h);
-                console.log( (diffX) + ", " + (diffY) );
-                alice.vx += diffX/1000;
-                alice.vy += diffY/1000;
-            }
+            if(alice){
+                if( this.mouseDown ) {
+                    diffX = Crafty.mousePos.x - (alice.x+alice.w);
+                    diffY = Crafty.mousePos.y - (alice.y+alice.h);
+                    alice.vx += diffX/1000;
+                    alice.vy += diffY/1000;
+                }
+             }
         })
     }
 });

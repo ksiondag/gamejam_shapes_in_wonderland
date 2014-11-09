@@ -56,8 +56,7 @@ Crafty.c('EatMe', {
 	},
 
 	setColor: function(c){
-		var colors=['green','red']
-		this.color(colors[c]);
+		this.color(c);
 	},
 
 	canIEat: function(collision){
@@ -73,12 +72,14 @@ Crafty.c('EatMe', {
 		this.level=this.level+(other.level/2);
 		this.w=this.level;
 		this.h=this.level;
+        Crafty.audio.play('bub',1);
 		other.eaten();
 	},
 
 	eaten: function(){
 		if(this.has('Alice')) {
-			console.log("You LOST");
+            Crafty.audio.stop();
+            Crafty.audio.play('lose',1);
             Crafty.scene("GameOver");
         }
 		else{
@@ -86,6 +87,8 @@ Crafty.c('EatMe', {
             eatMeCount--;
 
             if( eatMeCount === 1 ){
+                Crafty.audio.stop();
+                Crafty.audio.play('applause',1);
                 Crafty.scene("YouWin");
             }
 		}

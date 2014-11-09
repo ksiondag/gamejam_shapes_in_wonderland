@@ -108,6 +108,13 @@ Crafty.c('Bounce', {
         if( collision.normal.y !== 0) {
             this.vy *= -1;
         }
+
+        var listColors= ['black','#141D99','#52149E',
+            '#911499','#94141F','#149489','#948914',
+            '#609914','#911499'];
+        var randomCOlor = Crafty.math.randomInt(0, 8);
+        other.color(listColors[randomCOlor]);
+
     },
 
     elasticBounce: function( collision ) {
