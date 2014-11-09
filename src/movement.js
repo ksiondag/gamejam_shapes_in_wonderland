@@ -17,7 +17,7 @@ var sameDir = function( x, y ){
 
 };
 
-Crafty.c("Velocity", {
+Crafty.c('Velocity', {
     vx:0,
     vy:0,
     init: function() {
@@ -44,13 +44,12 @@ Crafty.c("Velocity", {
 
 });
 
-Crafty.c("Bounce", {
+Crafty.c('Bounce', {
     init: function() {
-        this.addComponent( "Velocity" );
-        this.addComponent( "Collision" );
+        this.requires('Velocity,Collision');
 
         this.onHit(
-            "Solid",
+            'Solid',
             function( collisions ) {
                 for( var i in collisions ) {
                     var collision = collisions[i];
@@ -65,7 +64,7 @@ Crafty.c("Bounce", {
         );
 
         this.onHit(
-            "Bounce",
+            'Bounce',
             function( collisions ) {
                 for( var i in collisions ) {
                     var collision = collisions[i];

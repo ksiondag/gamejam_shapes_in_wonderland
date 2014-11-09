@@ -1,0 +1,6 @@
+
+Crafty.scene('Menu', function() {
+    
+
+});
+

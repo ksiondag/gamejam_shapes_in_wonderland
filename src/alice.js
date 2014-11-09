@@ -9,7 +9,9 @@ var newAlice = function( eatme ) {
 
 Crafty.c( 'Clickable', {
     init: function() {
+        this.requires('Mouse');
         this.bind("MouseDown", function(e) {
+            console.log( e );
             if( e.button === Crafty.mouseButtons.LEFT ) {
                 this.addComponent('Alice');
             }
@@ -20,7 +22,8 @@ Crafty.c( 'Clickable', {
 Crafty.c( 'Control', {
     init: function() {
         this.bind("MouseDown", function(e) {
-            if( e.button === Crafty.mouseButtons.RIGHT ) {
+            
+            if( alice && e.button === Crafty.mouseButtons.RIGHT ) {
                 diffX = e.realX - alice.x;
                 diffY = e.realY - alice.y;
                 console.log( (diffX) + ", " + (diffY) );
@@ -33,9 +36,9 @@ Crafty.c( 'Control', {
 
 Crafty.c( 'Alice', {
     init: function() {
+        this.requires('Mouse,eatMe');
         newAlice( this );
 
-        this.addComponent('Color');
         this.color('blue');
 
     },

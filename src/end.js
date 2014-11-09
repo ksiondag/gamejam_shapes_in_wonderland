@@ -1,0 +1,5 @@
+
+Crafty.scene('GameOver', function() {
+    
+
+});
