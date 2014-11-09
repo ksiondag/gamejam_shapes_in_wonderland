@@ -22,6 +22,7 @@ Crafty.c('Velocity', {
     vy:0,
     init: function() {
         this.bind('EnterFrame', function() {
+            this.maxVelocityNormalize();
             this.x += this.vx;
             this.y += this.vy;
         });
@@ -40,6 +41,15 @@ Crafty.c('Velocity', {
 
     yDir: function() {
         return direction( this.vy );
+    },
+
+    maxVelocityNormalize: function() {
+        speedSquared = this.vx*this.vx + this.vy*this.vy;
+        maxSpeed = 5;
+        if( speedSquared > maxSpeed*maxSpeed ) {
+            this.vx *= maxSpeed/Math.sqrt(speedSquared);
+            this.vy *= maxSpeed/Math.sqrt(speedSquared);
+        }
     }
 
 });

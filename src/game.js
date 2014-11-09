@@ -1,8 +1,7 @@
 
-Crafty.scene('MainGame',function(){
-
+function createBorderWalls() {
     // Put a click listener on whole game div
-    var clickSpace = Crafty.e('2D,Mouse,Control')
+    Crafty.e('2D,Mouse,Control')
         .attr({
             x:0,
             y:0,
@@ -44,9 +43,20 @@ Crafty.scene('MainGame',function(){
     })
     .color("black");
 
+}
+
+Crafty.scene('MainGame',function(){
+
+    createBorderWalls();
+
     //Create 5 eatMes
-    for(var i=0;i<30;i++){
-        createRandomeatMe();
+    for(var i=0;i<14;i++){
+        createRandomeatMe(3,6);
     }
+    for(var i=0;i<14;i++){
+        createRandomeatMe(9,12);
+    }
+    
+    createRandomeatMe(7,7).addComponent('Alice');
 });
 

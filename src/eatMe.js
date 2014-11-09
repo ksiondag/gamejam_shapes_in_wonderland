@@ -1,7 +1,8 @@
+var eatMeCount = 0;
 Crafty.c('EatMe', {
 	level:1,
 	init: function() {
-		this.requires('2D,Canvas,Color,Bounce,Clickable');
+		this.requires('2D,Canvas,Color,Bounce');
 		//Deafaul attributes
 		this.attr({
 			x:0,
@@ -76,10 +77,17 @@ Crafty.c('EatMe', {
 	},
 
 	eaten: function(){
-		if(this.has('Alice'))
+		if(this.has('Alice')) {
 			console.log("You LOST");
+            Crafty.scene("GameOver");
+        }
 		else{
 			this.destroy();
+            eatMeCount--;
+
+            if( eatMeCount === 1 ){
+                Crafty.scene("YouWin");
+            }
 		}
 	},
 
@@ -109,14 +117,17 @@ Crafty.c('EatMe', {
 });
 
 
-function createRandomeatMe(){
+function createRandomeatMe( minLevel, maxLevel ){
 	var randomXposition = Crafty.math.randomInt(0, 700);
 	var randomYposition = Crafty.math.randomInt(0, 500);
-	var randomlevel = Crafty.math.randomInt(5, 10);
+	var randomlevel = Crafty.math.randomInt(minLevel, maxLevel);
 	var eater = Crafty.e('EatMe').Velocity( 
         Crafty.math.randomInt(-1, 1),
         Crafty.math.randomInt(-1, 1)
     );
+
+    eatMeCount++;
+
     eater.setLevel(randomlevel);
 	eater.setPosition(randomXposition,randomYposition);
 	return eater;
