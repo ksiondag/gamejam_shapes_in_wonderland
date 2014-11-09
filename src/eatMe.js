@@ -18,7 +18,13 @@ Crafty.c('EatMe', {
 			'EatMe',
 			function(collisions){
 				for( var i in collisions ) {
-                    var collision = collisions[i];
+					var collision = collisions[i];
+					//if (this.vx >3 || this.vy>3)
+					//{
+					//	spreadEatme(collision.obj);
+				//	console.log("speedup")
+					//}
+                    
                     if(this.canIEat(collision)){
                     	this.eatIt(collision);
                     }
@@ -69,11 +75,16 @@ Crafty.c('EatMe', {
 
 	eatIt: function(collision){
 		var other = collision.obj;
-		this.level=this.level+(other.level/2);
-		this.w=this.level;
-		this.h=this.level;
+		this.setLevel(this.level+1)
+			other.setLevel(other.level-1)
         Crafty.audio.play('bub',1);
+		
+		if (other.level<2)
+		{
+			if (this.level<3)
+				this.setLevel(this.level+2)
 		other.eaten();
+		}
 	},
 
 	eaten: function(){
@@ -118,6 +129,34 @@ Crafty.c('EatMe', {
     }
 
 });
+
+function spreadEatme(traget){
+		
+	
+		var level=traget.level/2 
+		
+	var eater = Crafty.e('EatMe').Velocity( 
+        Crafty.math.randomInt(-1, 1),
+        Crafty.math.randomInt(-1, 1)
+    );
+
+    eatMeCount++;
+
+    eater.setLevel(level);
+	eater.setPosition(traget.x,traget.y);
+	return eater;
+	var eater = Crafty.e('EatMe').Velocity( 
+        Crafty.math.randomInt(-3, 3),
+        Crafty.math.randomInt(-3, 3)
+    );
+
+    eatMeCount++;
+
+    eater.setLevel(level);
+	eater.setPosition(traget.x,traget.y);
+	return eater;
+		traget.destroy();
+}
 
 
 function createRandomeatMe( minLevel, maxLevel, withWall ){
