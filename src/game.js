@@ -1,20 +1,4 @@
 
-
-//GAME
-Game ={
-    start: function(){
-        Crafty.init(800, 600,  document.getElementById('game'));
-        // Crafty.background('rgb(87, 109, 20)');
-        Crafty.scene('MainGame');
-    }
-}
-
-//Scenes
-// Crafty.scene('Menu',{
-    
-
-// });
-var x=[];
 Crafty.scene('MainGame',function(){
 
     //Create the walls
@@ -51,13 +35,9 @@ Crafty.scene('MainGame',function(){
     })
     .color("black");
 
-    
     //Create 5 eatMes
     for(var i=0;i<5;i++){
-        x.push(createRandomeatMe());
+        createRandomeatMe();
     }
 });
 
-Crafty.scene('Loading', function(){
-   
-});
