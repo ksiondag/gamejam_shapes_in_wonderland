@@ -47,7 +47,7 @@ Crafty.scene('Menu', function() {
         .Velocity( 
             Crafty.math.randomInt(-1, 1),
             Crafty.math.randomInt(-1, 1)
-        );;
+        );
         
 
     Crafty.e('2D,DOM,Mouse,Color')
@@ -71,6 +71,30 @@ Crafty.scene('Menu', function() {
         .bind("MouseDown", function(e) {
             Crafty.audio.stop();
             Crafty.scene('Level');
+        });
+
+    Crafty.e('2D,DOM,Mouse,Color')
+        .attr({
+            x:200,
+            y:400,
+            w:400,
+            h:50
+        })
+        .color("white");
+
+    Crafty.e('2D,DOM,Mouse,Text')
+       .attr({
+            x:200,
+            y:400,
+            w:400,
+            h:50
+        })
+        .text("Credits")
+        .textFont({ size: '32px', family: 'Helvetica', weight: 'bold' })
+        .bind("MouseDown", function(e) {
+            Crafty.audio.stop();
+            Crafty.audio.play('AinW',-1);
+            Crafty.scene('Credits');
         });
 
 });
